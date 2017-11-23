@@ -11,26 +11,29 @@ class Main extends React.Component {
       console.log("Video devices discovered:")
       for(let device of devices)
         if(device.kind == "videoinput") {
-          console.log(device.deviceId + "\n" + device.label)
+          console.log(device.deviceId + "\n" + device.label);
           if(device.label.toLowerCase().indexOf("leica") > -1) {
-            console.log("This is a microscope.")
-            source = device.deviceId
+            console.log("This is a microscope.");
+            source = device.deviceId;
           }
         }
+    
+      console.log("Selected device: " + source)
+      navigator.mediaDevices.getUserMedia({
+          video: {
+              deviceId: {
+                exact: source
+              }
+          }
+        }).then((stream) => {
+        let canvas = document.getElementById("image");
+        let feed = document.getElementById("feed");
+        feed.src = window.URL.createObjectURL(stream);
+        feed.play();
+        canvas.getContext("2d").drawImage(feed, 0, 0, 300, 300, 0, 0, 300, 300);
+
     })
     .catch((err) => alert("error: " + err));
-    navigator.mediaDevices.getUserMedia({
-        video: {
-            deviceId: {
-              exact: source
-            }
-        }
-      }).then((stream) => {
-      let canvas = document.getElementById("image");
-      let feed = document.getElementById("feed");
-      feed.src = window.URL.createObjectURL(stream);
-      feed.play();
-      canvas.getContext("2d").drawImage(feed, 0, 0, 300, 300, 0, 0, 300, 300);
     }).catch((err) => alert("error: " + err));
   }
   render() {
