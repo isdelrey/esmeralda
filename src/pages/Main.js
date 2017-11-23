@@ -9,10 +9,12 @@ class Main extends React.Component {
     console.log("Main mounts")
     navigator.mediaDevices.enumerateDevices().then((devices) => {
       console.log("Video devices discovered:")
-      source = devices[0];
       for(let device of devices)
-        if(device.kind == "videoinput")
+        if(device.kind == "videoinput") {
+          if(device.label.toLowerCase().indexOf("leica") > -1)
+            source = device.deviceId
           console.log(device.deviceId + "\n" + device.label)
+        }
     })
     .catch((err) => alert("error: " + err));
     navigator.mediaDevices.getUserMedia({
