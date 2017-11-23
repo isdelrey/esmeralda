@@ -5,12 +5,27 @@ import '../assets/css/Main.css';
 
 class Main extends React.Component {
   componentDidMount() {
-    navigator.mediaDevices.getUserMedia({video: true}).then((stream) => {
+    let source;
+    console.log("Main mounts")
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      console.log("Video devices discovered:")
+      source = devices[0];
+      for(let device of devices)
+        if(device.kind == "videoinput")
+          console.log(device.deviceId + "\n" + device.label)
+    })
+    .catch((err) => alert("error: " + err));
+    navigator.mediaDevices.getUserMedia({
+        video: true,
+        deviceId: {
+          exact: source
+        }
+      }).then((stream) => {
       let canvas = document.getElementById("image");
       let feed = document.getElementById("feed");
       feed.src = window.URL.createObjectURL(stream);
       feed.play();
-      //canvas.getContext("2d").drawImage(feed, 0, 0, 300, 300, 0, 0, 300, 300);
+      canvas.getContext("2d").drawImage(feed, 0, 0, 300, 300, 0, 0, 300, 300);
     }).catch((err) => alert("error: " + err));
   }
   render() {
