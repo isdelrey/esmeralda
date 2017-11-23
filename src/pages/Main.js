@@ -21,7 +21,9 @@ class Main extends React.Component {
     .catch((err) => alert("error: " + err));
     navigator.mediaDevices.getUserMedia({
         video: {
-            deviceId: source
+            deviceId: {
+              exact: source
+            }
         }
       }).then((stream) => {
       let canvas = document.getElementById("image");
