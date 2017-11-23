@@ -11,16 +11,19 @@ class Main extends React.Component {
       console.log("Video devices discovered:")
       for(let device of devices)
         if(device.kind == "videoinput") {
-          if(device.label.toLowerCase().indexOf("leica") > -1)
-            source = device.deviceId
           console.log(device.deviceId + "\n" + device.label)
+          if(device.label.toLowerCase().indexOf("leica") > -1) {
+            console.log("This is a microscope.")
+            source = device.deviceId
+          }
         }
     })
     .catch((err) => alert("error: " + err));
     navigator.mediaDevices.getUserMedia({
-        video: true,
-        deviceId: {
-          exact: source
+        video: {
+            optional: [{
+              sourceId: source
+          }]
         }
       }).then((stream) => {
       let canvas = document.getElementById("image");
