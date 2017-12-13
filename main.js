@@ -19,6 +19,7 @@ if ( process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) 
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({backgroundColor: '#fff', width: 1050, minWidth: 768, height: 700, minHeight: 400, darkTheme: false, titleBarStyle: 'hiddenInset'});
+  mainWindow.setAspectRatio(1.78);
   // and load the index.html of the app.
   let indexPath;
   if ( dev && process.argv.indexOf('--noDevServer') === -1 ) {

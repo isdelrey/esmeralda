@@ -1,0 +1,14 @@
+.menuitem .subitem {
+    padding: 8px 0;
+}
+.menuitem .subitem:hover span {
+    border-bottom: thin solid #e0e0e0;
+}
+.menuitem .subitem i {
+    margin-right: 5px;
+    margin-top: 2.5px;
+    float:right;
+}
+.menuitem .subitem:not(.checkable) i {
+    display: none;
+}

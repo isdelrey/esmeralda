@@ -1,2 +1,19 @@
-#feed {
+header {
+    background-color: #1e1e1e;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+}
+header {
+    color: #fff;
+    font-size:14px;
+    padding: 40px 20px 0 20px;
+} 
+main > * {
+    /*padding: 10px;*/
+}
+.controls {
+    padding: 30px;
+}
+.app_name {
+    cursor: default;
 }

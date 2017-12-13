@@ -1,0 +1,26 @@
+.menuitem {
+    margin-left:18px;
+    font-weight: lighter;
+    position: relative;
+    cursor: pointer;
+}
+.menuitem .title {
+    border-bottom: thin solid transparent;
+    padding-bottom: 2px;
+}
+.menuitem:hover .title,.menuitem.active .title {
+    border-bottom: thin solid #f0f0f0;
+}
+.menuitem:not(.active) .subitems {
+    display: none;
+}
+
+.menuitem .subitems {
+    background-color: rgba(0,0,0,0.6);
+    position: absolute;
+    top: 35px;
+    left: -10px;
+    width: 170px;
+    padding: 5px 10px;
+    z-index: 2;
+}
